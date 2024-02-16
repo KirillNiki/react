@@ -3,7 +3,6 @@ import './index.css';
 import { styled } from '@mui/material/styles'
 import { Grid, Paper } from '@mui/material';
 import { ResponsiveContainer } from 'recharts';
-import TextField from '@mui/material';
 
 
 
@@ -35,11 +34,6 @@ const WeightRow = styled(Paper)(({ theme }) => ({
     textSizeAdjust: 'revert'
 }))
 
-
-const TextItem = styled(Paper)(({ theme }) => ({
-    textAlign:'center',
-    
-}))
 
 function PannelCel(weight) {
     let color = cellColors.avarageW
