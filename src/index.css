@@ -1,16 +1,9 @@
+:root {
+    --smallW-color: rgb(122, 0, 41);
+    --avarageW-color: rgb(99, 0, 33);
+    --bigW-color: rgb(61, 0, 20);
+}
 
 .chair_pannel {
     width: 98%;
-}
-
-.smallW {
-    color: aqua;
-}
-
-.bigW {
-    color: rgb(20, 94, 94);
-}
-
-.avarageW {
-    color: rgb(0, 0, 0);
 }
