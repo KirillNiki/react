@@ -3,6 +3,9 @@ import './index.css';
 import { styled } from '@mui/material/styles'
 import { Grid, Paper } from '@mui/material';
 import { ResponsiveContainer } from 'recharts';
+import TextField from '@mui/material';
+
+
 
 let data = { weightPerPercent: 1, weights: [1, 1, 1, 1, 1, 11, 1, 1, 1, 1] }
 let persents = [23, 24, 24]
@@ -15,6 +18,7 @@ const cellColors = {
     bigW: style.getPropertyValue('--bigW-color')
 }
 
+
 let margin = 4
 const CellItem = styled(Paper)(({ color, theme }) => ({
     backgroundColor: color,
@@ -24,9 +28,17 @@ const CellItem = styled(Paper)(({ color, theme }) => ({
 }))
 
 const WeightRow = styled(Paper)(({ theme }) => ({
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     borderRadius: '10%',
     height: '100%',
+    textAlign:'center',
+    textSizeAdjust: 'revert'
+}))
+
+
+const TextItem = styled(Paper)(({ theme }) => ({
+    textAlign:'center',
+    
 }))
 
 function PannelCel(weight) {
@@ -52,7 +64,7 @@ function PannelRow(weights, row_index) {
         <Grid container style={{ padding: 1 }}>
             <Grid item xs={3}>
                 <WeightRow >
-                    {persents[row_index]}
+                    <p>hello</p>
                 </WeightRow>
             </Grid>
             <Grid item xs={1} />

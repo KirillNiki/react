@@ -7,3 +7,9 @@
 .chair_pannel {
     width: 98%;
 }
+
+p {
+    align-self: center;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 100%;
+}
