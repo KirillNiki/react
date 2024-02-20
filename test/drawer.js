@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
+import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -9,7 +10,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import { GrCodeSandbox } from "react-icons/gr";
 
 function DrawerList({ toggleDrawer }) {
 
@@ -60,11 +60,7 @@ export default function MyDrawer() {
 
   return (
     <>
-    <div onClick={toggleDrawer(true)}>
-          <GrCodeSandbox size={24} style={{ verticalAlign: 'middle' }} />
-          <span style={{ paddingLeft:5, verticalAlign: 'middle' }}>Weight mether</span>
-
-    </div>
+      <Button onClick={toggleDrawer(true)}>menu</Button>
       <Drawer
           anchor={'left'}
           open={isOpened}

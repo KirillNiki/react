@@ -1,14 +1,16 @@
-import MyChart from './Chart';
 import MyDrawer from './drawer';
 import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import './App.css';
-import { ChairPannel } from './ChairPannel';
+import Head from './Head';
+import Chart from './BarChart';
+import Paragraf from './Paragraf';
+import ChairPannel from './PieChart';
 
 
 const Item = styled(Paper)(({ color, theme }) => ({
-  backgroundColor: color, //theme.palette.mode === 'dark' ? '#1A2027' : '#F0E4E1',
+  backgroundColor: color || '#efefef',
   ...theme.typography.body2,
   padding: theme.spacing(1),
   textAlign: 'center',
@@ -16,18 +18,43 @@ const Item = styled(Paper)(({ color, theme }) => ({
 }));
 
 function App() {
+  const { innerWidth: width } = window;
+
   return (
     <div className="App">
+      <Head aspect_ratio={5} />
+      <div className='body' style={{ paddingLeft: '3%', paddingRight: '3%' }}>
+        <ChairPannel></ChairPannel>
 
-
-      <Grid container spacing={1} style={{ padding: 5 }}>
-        <Grid item xs={12}>
-          <Item color='#1A2027'>
-            <MyDrawer />
-          </Item>
+        <Head aspect_ratio={8} />
+        <Head aspect_ratio={8} />
+        <Paragraf></Paragraf>
+        <Head aspect_ratio={8} />
+        <Grid container>
+          <Grid item xs={6}>
+            <Paragraf />
+          </Grid>
+          <Grid item xs={6}>
+            <Paragraf />
+          </Grid>
         </Grid>
+        <Chart></Chart>
+        <Paragraf />
+        <Paragraf />
+
+        {/*       
+      <Grid container spacing={1} style={{ backgroundColor: '#FFF0EC' }}>
+        <Grid item xs={12} style={{ textAlign: 'left', margin: 4 }}>
+          <MyDrawer />
+        </Grid>
+        <Grid item xs={12} height={width * 0.8} >
+          <ChairPannel />
+        </Grid>
+      </Grid> */}
+
+        {/* <Grid container spacing={1} style={{ padding: 5 }}>
         <Grid item xs={6}>
-          <Item color='#1A2027'>
+          <Item>
             <MyChart />
           </Item>
         </Grid>
@@ -42,13 +69,9 @@ function App() {
         <Grid item xs={8}>
           <Item>xs=8</Item>
         </Grid>
-        <Grid item xs={12}>
-          <ChairPannel />
-        </Grid>
-      </Grid>
-      
+      </Grid> */}
 
-
+      </div>
     </div>
   );
 }

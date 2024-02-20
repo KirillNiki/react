@@ -4,25 +4,11 @@ import { styled } from '@mui/material/styles'
 import { Grid, Paper } from '@mui/material';
 import { ResponsiveContainer } from 'recharts';
 
+
+
 let data = { weightPerPercent: 1, weights: [1, 1, 1, 1, 1, 11, 1, 1, 1, 1] }
 let persents = [23, 24, 24]
 
-const gridContainer = {
-  display: "grid",
-  gridTemplateColumns: "repeat(4, 1fr)"
-};
-
-// Variable number of columns
-const gridContainer2 = {
-  display: "grid",
-  gridAutoColumns: "1fr",
-  gridAutoFlow: "column"
-};
-
-const gridItem = {
-  margin: "8px",
-  border: "1px solid red"
-};
 
 var style = getComputedStyle(document.body)
 const cellColors = {
@@ -35,10 +21,9 @@ const cellColors = {
 let margin = 4
 const CellItem = styled(Paper)(({ color, theme }) => ({
     backgroundColor: color,
-    borderRadius: '40%',
-    aspectRatio: 1,
+    borderRadius: '100%',
     margin: `${margin}%`,
-    // height: `${100 - 2 * margin}%`,
+    height: `${100 - 2 * margin}%`,
 }))
 
 const WeightRow = styled(Paper)(({ theme }) => ({
@@ -70,45 +55,43 @@ function PannelRow(weights, row_index) {
     let index = 0
 
     return (
-        <>
-        {/* // <Grid container style={{ padding: 1 }}> */}
-            {/* <Grid item xs={3}   >
+        <Grid container style={{ padding: 1 }}>
+            <Grid item xs={3}>
                 <WeightRow >
                     <p>hello</p>
                 </WeightRow>
-            </Grid> */}
-            {/* <Grid item xs={1} /> */}
+            </Grid>
+            <Grid item xs={1} />
 
             {keys.map((elem, key) => {
 
                 let cell_component = (
-                  <PannelCel weight={weigths[index++]} />
+                    <PannelCel weight={weigths[index++]} />
                 )
                 if (weigths.length === 2 && (key === 0 || key === 3)) {
-                  cell_component = (
-                      <div />
-                  )
+                    cell_component = (
+                        <div />
+                    )
                 }
                 return (
-                  <Grid item xs={3} key={key} >
-                      {cell_component}
-                  </Grid>
+                    <Grid item xs={2} key={key}>
+                        {cell_component}
+                    </Grid>
                 )
             })}
-        {/* </Grid> */}
-        </>
+        </Grid>
     )
 }
 
 function ChairPannel() {
     return (
-        // <ResponsiveContainer width='100%' aspect={3.0 / 1.0}>
-          <Grid container spacing={1} style={{ padding: 10 }}>
-            <PannelRow weights={data.weights.slice(0, 2)} row_index={0} />
-            <PannelRow weights={data.weights.slice(2, 6)} row_index={1} />
-            <PannelRow weights={data.weights.slice(6, 10)} row_index={2} />
-          </Grid>
-        // </ResponsiveContainer>
+        <ResponsiveContainer width='100%' aspect={3.0 / 1.0}>
+            <Grid container spacing={1} style={{ padding: 10 }}>
+                <PannelRow weights={data.weights.slice(0, 2)} row_index={0} />
+                <PannelRow weights={data.weights.slice(2, 6)} row_index={1} />
+                <PannelRow weights={data.weights.slice(6, 10)} row_index={2} />
+            </Grid>
+        </ResponsiveContainer>
     )
 }
 export { ChairPannel } 

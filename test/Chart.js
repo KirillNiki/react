@@ -2,9 +2,9 @@ import {
   CartesianGrid,
   XAxis,
   Tooltip,
-  LineChart,
+  LineChart, 
   Line,
-  ResponsiveContainer,
+  ResponsiveContainer
 } from 'recharts';
 
 const data01 = [
@@ -21,13 +21,13 @@ const data01 = [
 
 export default function MyChart() {
   return (
-    <ResponsiveContainer width='100%' aspect={4.0 / 6.0}>
-      {<LineChart data={data01} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
+    <ResponsiveContainer width='100%' aspect={4.0/6.0}>
+      {<LineChart width={300} height={600} data={data01} margin={{ top: 5, right: 20, left: 10, bottom: 5 }}>
         <XAxis dataKey="day" />
         <Tooltip />
-        <CartesianGrid/>
+        <CartesianGrid stroke="#f5f5f5" />
         <Line type="monotone" dataKey="wether" stroke="#ff7300" yAxisId={0} />
-      </LineChart>}
+      </LineChart> }
     </ResponsiveContainer>
   );
 }
