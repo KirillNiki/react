@@ -8,107 +8,107 @@ let data = { weightPerPercent: 1, weights: [1, 1, 1, 1, 1, 11, 1, 1, 1, 1] }
 let persents = [23, 24, 24]
 
 const gridContainer = {
-  display: "grid",
-  gridTemplateColumns: "repeat(4, 1fr)"
+	display: "grid",
+	gridTemplateColumns: "repeat(4, 1fr)"
 };
 
 // Variable number of columns
 const gridContainer2 = {
-  display: "grid",
-  gridAutoColumns: "1fr",
-  gridAutoFlow: "column"
+	display: "grid",
+	gridAutoColumns: "1fr",
+	gridAutoFlow: "column"
 };
 
 const gridItem = {
-  margin: "8px",
-  border: "1px solid red"
+	margin: "8px",
+	border: "1px solid red"
 };
 
 var style = getComputedStyle(document.body)
 const cellColors = {
-    smallW: style.getPropertyValue('--smallW-color'),
-    avarageW: style.getPropertyValue('--avarageW-color'),
-    bigW: style.getPropertyValue('--bigW-color')
+	smallW: style.getPropertyValue('--smallW-color'),
+	avarageW: style.getPropertyValue('--avarageW-color'),
+	bigW: style.getPropertyValue('--bigW-color')
 }
 
 
 let margin = 4
 const CellItem = styled(Paper)(({ color, theme }) => ({
-    backgroundColor: color,
-    borderRadius: '40%',
-    aspectRatio: 1,
-    margin: `${margin}%`,
-    // height: `${100 - 2 * margin}%`,
+	backgroundColor: color,
+	borderRadius: '40%',
+	aspectRatio: 1,
+	margin: `${margin}%`,
+	// height: `${100 - 2 * margin}%`,
 }))
 
 const WeightRow = styled(Paper)(({ theme }) => ({
-    backgroundColor: 'white',
-    borderRadius: '10%',
-    height: '100%',
-    textAlign:'center',
-    textSizeAdjust: 'revert'
+	backgroundColor: 'white',
+	borderRadius: '10%',
+	height: '100%',
+	textAlign: 'center',
+	textSizeAdjust: 'revert'
 }))
 
 
 function PannelCel(weight) {
-    let color = cellColors.avarageW
-    if (weight / data.weightPerPercent > 15) {
-        color = cellColors.bigW
-    }
-    else if (weight / data.weightPerPercent < 5) {
-        color = cellColors.smallW
-    }
+	let color = cellColors.avarageW
+	if (weight / data.weightPerPercent > 15) {
+		color = cellColors.bigW
+	}
+	else if (weight / data.weightPerPercent < 5) {
+		color = cellColors.smallW
+	}
 
-    return (
-        <CellItem color={color} />
-    )
+	return (
+		<CellItem color={color} />
+	)
 }
 
 function PannelRow(weights, row_index) {
-    let keys = Array(4).fill(null)
-    let weigths = weights.weights
-    let index = 0
+	let keys = Array(4).fill(null)
+	let weigths = weights.weights
+	let index = 0
 
-    return (
-        <>
-        {/* // <Grid container style={{ padding: 1 }}> */}
-            {/* <Grid item xs={3}   >
+	return (
+		<>
+			{/* // <Grid container style={{ padding: 1 }}> */}
+			{/* <Grid item xs={3}   >
                 <WeightRow >
                     <p>hello</p>
                 </WeightRow>
             </Grid> */}
-            {/* <Grid item xs={1} /> */}
+			{/* <Grid item xs={1} /> */}
 
-            {keys.map((elem, key) => {
+			{keys.map((elem, key) => {
 
-                let cell_component = (
-                  <PannelCel weight={weigths[index++]} />
-                )
-                if (weigths.length === 2 && (key === 0 || key === 3)) {
-                  cell_component = (
-                      <div />
-                  )
-                }
-                return (
-                  <Grid item xs={3} key={key} >
-                      {cell_component}
-                  </Grid>
-                )
-            })}
-        {/* </Grid> */}
-        </>
-    )
+				let cell_component = (
+					<PannelCel weight={weigths[index++]} />
+				)
+				if (weigths.length === 2 && (key === 0 || key === 3)) {
+					cell_component = (
+						<div />
+					)
+				}
+				return (
+					<Grid item xs={3} key={key} >
+						{cell_component}
+					</Grid>
+				)
+			})}
+			{/* </Grid> */}
+		</>
+	)
 }
 
 function ChairPannel() {
-    return (
-        // <ResponsiveContainer width='100%' aspect={3.0 / 1.0}>
-          <Grid container spacing={1} style={{ padding: 10 }}>
-            <PannelRow weights={data.weights.slice(0, 2)} row_index={0} />
-            <PannelRow weights={data.weights.slice(2, 6)} row_index={1} />
-            <PannelRow weights={data.weights.slice(6, 10)} row_index={2} />
-          </Grid>
-        // </ResponsiveContainer>
-    )
+	return (
+		// <ResponsiveContainer width='100%' aspect={3.0 / 1.0}>
+		<Grid container spacing={1} style={{ padding: 10 }}>
+			<PannelRow weights={data.weights.slice(0, 2)} row_index={0} />
+			<PannelRow weights={data.weights.slice(2, 6)} row_index={1} />
+			<PannelRow weights={data.weights.slice(6, 10)} row_index={2} />
+		</Grid>
+		// </ResponsiveContainer>
+	)
 }
 export { ChairPannel } 

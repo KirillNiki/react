@@ -1,19 +1,13 @@
 body {
-    margin: 0px;
+	margin: 0px;
 }
 
 :root {
-    --bigW-color: rgb(54, 0, 17);
-    --avarageW-color: rgb(99, 0, 33);
-    --smallW-color: rgb(129, 0, 43);
-}
-
-.chair_pannel {
-    width: 98%;
+	--bigW-color: rgb(54, 0, 17);
+	--avarageW-color: rgb(131, 0, 44);
+	--smallW-color: rgb(109, 0, 36);
 }
 
 p {
-    align-self: center;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 100%;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
