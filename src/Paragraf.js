@@ -1,12 +1,11 @@
 import { React } from "react";
 import { get_colors } from "./getColor";
-import { Children } from 'react';
 
 
 const colors = get_colors()
 
 
-function Paragraf(props, children) {
+function Paragraf(props) {
 	let font_color = props.red ? colors.smallW : 'black'
 	let font_weight = props.red ? 'bold' : 'normal'
 
@@ -32,10 +31,6 @@ function Paragraf(props, children) {
 			}}>
 				{props.text}
 			</p>
-
-			{Children.map(children, child =>
-				child
-			)}
 		</div >
 	)
 }

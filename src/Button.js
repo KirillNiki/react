@@ -27,10 +27,10 @@ function MyButton() {
             onClick={() => {
               switch (buttonState) {
                 case true:
-                  ChangeText(start_text)
+                  ChangeText('567')
                   break
                 default:
-                  ChangeText('567')
+                  ChangeText(start_text)
                   break
               }
               ChangeState(!buttonState)
@@ -45,6 +45,7 @@ function MyButton() {
             marginLeft={2}
             red={false}
             text={text}
+            font_weight='bold'
           />
         </Grid>
 

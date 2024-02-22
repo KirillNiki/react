@@ -71,22 +71,14 @@ function App() {
 				<Pannel />
 
 				<div style={{ marginTop: '10%' }}>
-					{/* <Paragraf
-						aspect_ratio={10}
-						marginLeft={5}
-						red={true}
-						text={'Current state'}
-					/> */}
 					<CurrentState />
 				</div>
-				<MyButton />
+
+				<div style={{ marginTop: '25%' }}>
+					<Head aspect_ratio={8} text='history' marginLeft='42' />
+				</div>
 
 
-
-
-
-
-				<Head aspect_ratio={8} />
 				<Grid container>
 					<Grid item xs={6}>
 						<Paragraf />
