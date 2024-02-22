@@ -26,7 +26,7 @@ function ColorfulText(props) {
       style={{
         background: `${props.color}`,
         borderRadius: '2%/14%',
-        marginTop: '5%'
+        marginTop: '3%'
       }}>
       {object}
     </div>

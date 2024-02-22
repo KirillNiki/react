@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { ResponsiveContainer } from "recharts";
 import Grid from '@mui/material/Grid';
 import Paragraf from "./Paragraf";
+import { get_colors } from "./getColor";
 
+const colors = get_colors()
 const start_text = 'Press to enter weight measurment'
 
 function MyButton() {
@@ -14,15 +16,26 @@ function MyButton() {
     <ResponsiveContainer aspect={1.0 / 0.15} width={'100%'}>
       <Grid container alignItems='center'>
 
+        <Grid item xs={9}>
+          <Paragraf
+            aspect_ratio={8}
+            marginLeft={4}
+            red={true}
+            text={text}
+          />
+        </Grid>
+
         <Grid item xs={3}>
           <Button
             size="lg"
             variant="outlined"
             color='inherit'
+            // color={colors.bigW}
             style={{
               width: '70%',
               fontSize: '2.4vw',
-              aspectRatio: 3
+              aspectRatio: 3,
+              color: colors.bigW
             }}
             onClick={() => {
               switch (buttonState) {
@@ -37,16 +50,6 @@ function MyButton() {
             }}>
             click
           </Button>
-        </Grid>
-
-        <Grid item xs={9}>
-          <Paragraf
-            aspect_ratio={8}
-            marginLeft={2}
-            red={false}
-            text={text}
-            font_weight='bold'
-          />
         </Grid>
 
       </Grid>

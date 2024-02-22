@@ -12,7 +12,7 @@ const cellColors = {
 
   text1: style.getPropertyValue('--color-text1'),
   text2: style.getPropertyValue('--color-text2'),
-  text3: style.getPropertyValue('--color-text3'),
+  text3: style.getPropertyValue('--color-text2'),
 }
 
 

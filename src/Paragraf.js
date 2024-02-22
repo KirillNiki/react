@@ -24,6 +24,7 @@ function Paragraf(props) {
 		}} >
 
 			<p style={{
+				whiteSpace: 'pre-line',
 				marginLeft: `${props.marginLeft}%`,
 				fontSize: '4vw',
 				fontWeight: `${font_weight}`,
