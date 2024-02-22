@@ -7,6 +7,9 @@ import Head from './Head';
 import Chart from './BarChart';
 import Paragraf from './Paragraf';
 import ChairPannel from './PieChart';
+import MyButton from './Button';
+import ColorfulText from './ColorfulText';
+import { get_colors } from './getColor';
 
 
 const Item = styled(Paper)(({ color, theme }) => ({
@@ -17,7 +20,7 @@ const Item = styled(Paper)(({ color, theme }) => ({
 	color: theme.palette.text.secondary,
 }));
 
-
+const myColors = get_colors()
 const current_weight = 90
 
 function Pannel() {
@@ -30,6 +33,26 @@ function Pannel() {
 				text={'Weight distribution'}
 			/>
 			<ChairPannel />
+		</div>
+	)
+}
+
+function CurrentState() {
+	return (
+		<div className='current-state'>
+			<ColorfulText
+				color={myColors.block1}
+				text_color={myColors.text1}
+				text={`posture: ${'correct'}`}
+			/>
+			<ColorfulText
+				color={myColors.block2}
+				text_color={myColors.text2}
+				text={`change posture: ${'none'}`}
+			/>
+			<ColorfulText color={myColors.block3}>
+				<MyButton />
+			</ColorfulText>
 		</div>
 	)
 }
@@ -47,17 +70,22 @@ function App() {
 			<div className='body' style={{ paddingLeft: '3%', paddingRight: '3%' }}>
 				<Pannel />
 
-				<Head
-					aspect_ratio={8}
-					text={'current state'}
-					marginLeft={36}
-				/>
-				<Paragraf
-					aspect_ratio={10}
-					text={`your weight: ${current_weight}`}
-					red={false}
-					marginLeft={20}
-				/>
+				<div style={{ marginTop: '10%' }}>
+					{/* <Paragraf
+						aspect_ratio={10}
+						marginLeft={5}
+						red={true}
+						text={'Current state'}
+					/> */}
+					<CurrentState />
+				</div>
+				<MyButton />
+
+
+
+
+
+
 				<Head aspect_ratio={8} />
 				<Grid container>
 					<Grid item xs={6}>
