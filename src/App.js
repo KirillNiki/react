@@ -8,7 +8,6 @@ import ChairPannel from './PieChart';
 import MyButton from './Button';
 import ColorfulText from './ColorfulText';
 import { get_colors } from './getColor';
-import { colors } from '@mui/material';
 
 
 
@@ -24,6 +23,20 @@ function Pannel() {
 				text={'Weight distribution'}
 			/>
 			<ChairPannel />
+		</div>
+	)
+}
+
+function WeightChart() {
+	return (
+		<div className='weight-chart' style={{ marginTop: '20%' }}>
+			<Paragraf
+				aspect_ratio={10}
+				marginLeft={5}
+				red={true}
+				text={'Weight at spesific time'}
+			/>
+			<Chart />
 		</div>
 	)
 }
@@ -49,34 +62,29 @@ function CurrentState() {
 }
 
 function HistoryPart(props) {
-
 	return (
-		// <Grid item xs={props.xs}>
-		// 	<Paragraf
-		// 		aspect_ratio={8}
-		// 		marginLeft={5}
-		// 		red={true}
-		// 		text={props.texts[0]}
-		// 	/>
-		// 	<div style={{
-		// 		marginTop: '10%',
-		// 		border: '10px',
-		// 		borderColor: `${myColors.bigW}`,
-		// 		borderRadius: '5%/20%'
-		// 	}}>
-		// 	</div>
-		// </Grid>
 		<div>
-			{props.texts.map((text) => {
-				console.log(props.texts)
+			<Paragraf
+				aspect_ratio={8}
+				marginLeft={5}
+				red={true}
+				text={props.main_text}
+			/>
 
-				return <Paragraf
-					aspect_ratio={2}
-					marginLeft={5}
-					red={false}
-					text={text}
-				/>
-			})}
+			<div style={{
+				border: 'solid 0.5vw',
+				borderColor: `${myColors.block2}`,
+				borderRadius: '5%/10%'
+			}}>
+				{props.texts.map((single_text) =>
+					<Paragraf
+						aspect_ratio={100}
+						marginLeft={5}
+						red={false}
+						text={single_text}
+					/>
+				)}
+			</div>
 		</div>
 	)
 }
@@ -101,18 +109,36 @@ function App() {
 					<Head aspect_ratio={8} text='history' marginLeft='42' />
 				</div>
 
-				<Grid container>
-					<HistoryPart main_text={'number of times'} texts={[`- day ${0}`, `- hour ${0}`]} xs={6} />
-					<HistoryPart main_text={'number of times'} texts={[`- day ${0}`, `- hour ${0}`]} xs={6} />
-				</Grid>
+				<div style={{ margin: '4%' }}>
+					<Grid container>
+						<Grid item xs={5.5}>
+							<HistoryPart main_text={'number of times'} texts={[`- day ${0}`, `- hour ${0}`]} />
+						</Grid>
+						<Grid item xs={1} />
+						<Grid item xs={5.5}>
+							<HistoryPart main_text={'avarage weight'} texts={[`- max ${0}`, `- min ${0}`]} />
+						</Grid>
+					</Grid>
+				</div>
 
-				<Chart></Chart>
-				<Paragraf />
-				<Paragraf />
+				<WeightChart />
+				<div style={{marginTop: '10%'}}>
+					<ColorfulText
+						color={myColors.block2}
+						text_color={myColors.text2}
+						text={'training every 40 minutes'}
+					/>
+					<ColorfulText
+						color={myColors.block2}
+						text_color={myColors.text2}
+						text={`time before trianing(sec): ${2399}`}
+					/>
+				</div>
+
+				<div style={{height: '100px'}}/>
 
 			</div>
 		</div>
 	);
 }
-
 export default App;
