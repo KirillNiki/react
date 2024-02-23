@@ -1,5 +1,6 @@
-import MyDrawer from './drawer';
+import MyDrawer from './components/drawer';
 import Grid from '@mui/material/Grid';
+import { useEffect, useState } from 'react';
 import './App.css';
 import Head from './components/Head';
 import Chart from './components/BarChart';
@@ -7,12 +8,14 @@ import Paragraf from './components/Paragraf';
 import ChairPannel from './components/PieChart';
 import MyButton from './components/Button';
 import ColorfulText from './components/ColorfulText';
-import { get_colors } from './getColor';
+import { get_colors } from './components/getColor';
+import { GetData } from './DataReciver.js'
+import { Train } from './logic.js';
 
 
 const myColors = get_colors()
 
-function Pannel() {
+function Pannel(props) {
 	return (
 		<div className='chair-pannel'>
 			<Paragraf
@@ -21,12 +24,12 @@ function Pannel() {
 				red={true}
 				text={'Weight distribution'}
 			/>
-			<ChairPannel />
+			<ChairPannel data={props.data} />
 		</div>
 	)
 }
 
-function WeightChart() {
+function WeightChart(props) {
 	return (
 		<div className='weight-chart' style={{ marginTop: '20%' }}>
 			<Paragraf
@@ -35,12 +38,12 @@ function WeightChart() {
 				red={true}
 				text={'Weight at spesific time'}
 			/>
-			<Chart />
+			<Chart data={props.data} />
 		</div>
 	)
 }
 
-function CurrentState() {
+function CurrentState(props) {
 	return (
 		<div className='current-state'>
 			<ColorfulText
@@ -89,6 +92,19 @@ function HistoryPart(props) {
 }
 
 function App() {
+	const [data, setData] = useState(GetData())
+
+	useEffect(() => {
+		const interval = setInterval(async () => {
+			let data = await GetData()
+			setData(data)
+		}, 2000)
+
+		return () => {
+			clearInterval(interval);
+		}
+	}, [])
+
 
 	return (
 		<div className="App">
@@ -98,7 +114,7 @@ function App() {
 				marginLeft={50}
 			/>
 			<div className='body' style={{ paddingLeft: '3%', paddingRight: '3%' }}>
-				<Pannel />
+				<Pannel data={data} />
 
 				<div style={{ marginTop: '10%' }}>
 					<CurrentState />
@@ -120,7 +136,7 @@ function App() {
 					</Grid>
 				</div>
 
-				<WeightChart />
+				<WeightChart data={data} />
 				<div style={{ marginTop: '10%' }}>
 					<ColorfulText
 						color={myColors.block2}

@@ -1,4 +1,3 @@
-import { Grid } from "@mui/material";
 import {
 	Bar,
 	ComposedChart,
@@ -7,25 +6,8 @@ import {
 	XAxis,
 	YAxis,
 	Line,
-	Legend,
 	ResponsiveContainer
 } from "recharts";
-
-const data = [
-	{ hour: '', day: "", value: 0 },
-	{ hour: "19", day: "23.09", value: 10 },
-	{ hour: "D", day: "23.98", value: 20 },
-	{ hour: "C", day: "g", value: 15 },
-	{ hour: "C", day: "g", value: 15 },
-	{ hour: "C", day: "g", value: 15 },
-	{ hour: "C", day: "g", value: 15 },
-	{ hour: "C", day: "g", value: 15 },
-	{ hour: "C", day: "g", value: 15 },
-	{ hour: "C", day: "g", value: 15 },
-	{ hour: "C", day: "g", value: 50 },
-	{ hour: '', day: "", value: 0 },
-];
-
 
 var style = getComputedStyle(document.body)
 const cellColors = {
@@ -37,10 +19,12 @@ const cellColors = {
 
 const max_offset = 10
 
-function Chart() {
+function Chart(props) {
+	let info_data = props.data.infoData
+
 	return (
 		<ResponsiveContainer width="100%" aspect={1 / 0.75}>
-			<ComposedChart data={data} margin={{ left: -20, right: 10, top: 20 }}>
+			<ComposedChart data={info_data} margin={{ left: -20, right: 10, top: 20 }}>
 				<defs>
 					<linearGradient id="gradient" x1='0' y1='0' x2='0' y2='1'>
 						<stop offset="5%" stopColor={cellColors.avarageW} stopOpacity={1} />
@@ -48,7 +32,7 @@ function Chart() {
 					</linearGradient>
 				</defs>
 
-				<XAxis  angle={-70} dataKey="day" tickLine={false} axisLine={false} />
+				<XAxis angle={-70} dataKey="time" tickLine={false} axisLine={false} height={40} />
 				<YAxis tickLine={false} axisLine={false}
 					domain={[`dataMin`, `dataMax + ${max_offset}`]}
 				/>
@@ -58,8 +42,7 @@ function Chart() {
 				<Bar
 					dataKey="value"
 					fill="url(#gradient)"
-					barSize={'40%'}
-					barGap={100}>
+					barSize={10}>
 				</Bar>
 				<Line type="monotone" dataKey="value" stroke={`${cellColors.bigW}`} />
 			</ComposedChart>

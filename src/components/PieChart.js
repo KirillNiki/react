@@ -1,67 +1,7 @@
 import { Grid } from "@mui/material";
 import React from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Label } from 'recharts';
-import { get_colors } from "../getColor";
 
-
-const colors = get_colors()
-
-function data_color(value) {
-	let color = colors.avarageW
-
-	if (value > 50) {
-		color = colors.bigW
-	}
-	else if (value < 5) {
-		color = colors.smallW
-	}
-	return color
-}
-
-
-let data_index = 0
-const mydata = [
-	[
-		{ name: 'test', value: 23, color: data_color(23) },
-		{ name: 'test1', value: 68, color: '#ffffff' }
-	],
-	[
-		{ name: 'test', value: 345, color: data_color(345) },
-		{ name: 'test1', value: 68, color: '#ffffff' }
-	],
-	[
-		{ name: 'test', value: 32, color: data_color(32) },
-		{ name: 'test1', value: 68, color: '#ffffff' }
-	],
-	[
-		{ name: 'test', value: 77, color: data_color(77) },
-		{ name: 'test1', value: 68, color: '#ffffff' }
-	],
-	[
-		{ name: 'test', value: 32, color: '#ff0000' },
-		{ name: 'test1', value: 68, color: '#ffffff' }
-	],
-	[
-		{ name: 'test', value: 32, color: '#ff0000' },
-		{ name: 'test1', value: 68, color: '#ffffff' }
-	],
-	[
-		{ name: 'test', value: 32, color: '#ff0000' },
-		{ name: 'test1', value: 68, color: '#ffffff' }
-	],
-	[
-		{ name: 'test', value: 32, color: '#ff0000' },
-		{ name: 'test1', value: 68, color: '#ffffff' }
-	],
-	[
-		{ name: 'test', value: 32, color: '#ff0000' },
-		{ name: 'test1', value: 68, color: '#ffffff' }
-	],
-	[
-		{ name: 'test', value: 32, color: '#ff0000' },
-		{ name: 'test1', value: 68, color: '#ffffff' }
-	],
-]
 
 function ChairCell(props) {
 	return (
@@ -120,14 +60,13 @@ function ChairRow(props) {
 	)
 }
 
-function ChairChart() {
+function ChairChart(props) {
 	return (
 		<ResponsiveContainer width={'100%'} aspect={'3/4'}>
-			<ChairRow in_row_count={2} data={mydata.slice(0, 2)} />
-			<ChairRow in_row_count={4} data={mydata.slice(2, 6)} />
-			<ChairRow in_row_count={4} data={mydata.slice(6, 10)} />
+			<ChairRow in_row_count={2} data={props.data.weights.slice(0, 2)} />
+			<ChairRow in_row_count={4} data={props.data.weights.slice(2, 6)} />
+			<ChairRow in_row_count={4} data={props.data.weights.slice(6, 10)} />
 		</ResponsiveContainer>
 	)
 }
-
 export default ChairChart
