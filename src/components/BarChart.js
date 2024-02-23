@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import {
 	Bar,
 	ComposedChart,
@@ -11,18 +12,18 @@ import {
 } from "recharts";
 
 const data = [
-	{ name: '', value: 0 },
-	{ name: "A", value: 10 },
-	{ name: "B", value: 20 },
-	{ name: "C", value: 15 },
-	{ name: "C", value: 15 },
-	{ name: "C", value: 15 },
-	{ name: "C", value: 15 },
-	{ name: "C", value: 15 },
-	{ name: "C", value: 15 },
-	{ name: "C", value: 15 },
-	{ name: "C", value: 15 },
-	{ name: '', value: 0 },
+	{ hour: '', day: "", value: 0 },
+	{ hour: "19", day: "23.09", value: 10 },
+	{ hour: "D", day: "23.98", value: 20 },
+	{ hour: "C", day: "g", value: 15 },
+	{ hour: "C", day: "g", value: 15 },
+	{ hour: "C", day: "g", value: 15 },
+	{ hour: "C", day: "g", value: 15 },
+	{ hour: "C", day: "g", value: 15 },
+	{ hour: "C", day: "g", value: 15 },
+	{ hour: "C", day: "g", value: 15 },
+	{ hour: "C", day: "g", value: 15 },
+	{ hour: '', day: "", value: 0 },
 ];
 
 
@@ -38,8 +39,8 @@ const max_offset = 10
 
 function Chart() {
 	return (
-		<ResponsiveContainer width='100%' aspect={2.0 / 1.0}>
-			<ComposedChart data={data}>
+		<ResponsiveContainer width="100%" aspect={1 / 0.75}>
+			<ComposedChart data={data} margin={{ left: -20, right: 10, top: 20 }}>
 				<defs>
 					<linearGradient id="gradient" x1='0' y1='0' x2='0' y2='1'>
 						<stop offset="5%" stopColor={cellColors.avarageW} stopOpacity={1} />
@@ -47,18 +48,17 @@ function Chart() {
 					</linearGradient>
 				</defs>
 
-				<XAxis dataKey="name" tickLine={false} axisLine={false} />
+				<XAxis  angle={-70} dataKey="day" tickLine={false} axisLine={false} />
 				<YAxis tickLine={false} axisLine={false}
 					domain={[0, `dataMax + ${max_offset}`]}
 				/>
 
 				<CartesianGrid vertical={false} strokeDasharray="4" />
 				<Tooltip />
-				<Legend />
 				<Bar
 					dataKey="value"
 					fill="url(#gradient)"
-					barSize={10}>
+					width={'5%'}>
 				</Bar>
 				<Line type="monotone" dataKey="value" stroke={`${cellColors.bigW}`} />
 			</ComposedChart>

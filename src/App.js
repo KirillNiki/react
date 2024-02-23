@@ -121,7 +121,7 @@ function App() {
 				</div>
 
 				<WeightChart />
-				<div style={{marginTop: '10%'}}>
+				<div style={{ marginTop: '10%' }}>
 					<ColorfulText
 						color={myColors.block2}
 						text_color={myColors.text2}
@@ -134,7 +134,7 @@ function App() {
 					/>
 				</div>
 
-				<div style={{height: '100px'}}/>
+				<div style={{ height: '100px' }} />
 
 			</div>
 		</div>
