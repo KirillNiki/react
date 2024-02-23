@@ -1,14 +1,13 @@
 import MyDrawer from './drawer';
 import Grid from '@mui/material/Grid';
 import './App.css';
-import Head from './Head';
-import Chart from './BarChart';
-import Paragraf from './Paragraf';
-import ChairPannel from './PieChart';
-import MyButton from './Button';
-import ColorfulText from './ColorfulText';
+import Head from './components/Head';
+import Chart from './components/BarChart';
+import Paragraf from './components/Paragraf';
+import ChairPannel from './components/PieChart';
+import MyButton from './components/Button';
+import ColorfulText from './components/ColorfulText';
 import { get_colors } from './getColor';
-
 
 
 const myColors = get_colors()

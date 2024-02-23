@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { ResponsiveContainer } from "recharts";
 import Grid from '@mui/material/Grid';
 import Paragraf from "./Paragraf";
-import { get_colors } from "./getColor";
+import { get_colors } from "../getColor";
 
 const colors = get_colors()
 const start_text = 'Press to enter weight measurment'

@@ -1,5 +1,5 @@
 import React from "react";
-import { get_colors } from './getColor'
+import { get_colors } from '../getColor'
 
 const cellColors = get_colors()
 
