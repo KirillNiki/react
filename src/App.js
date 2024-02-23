@@ -92,12 +92,11 @@ function HistoryPart(props) {
 }
 
 function App() {
-	const [data, setData] = useState(GetData())
+	const [data, setData] = useState(undefined)
 
 	useEffect(() => {
-		const interval = setInterval(async () => {
-			let data = await GetData()
-			setData(data)
+		const interval = setInterval(() => {
+			GetData().then((res) => setData(res))
 		}, 2000)
 
 		return () => {
@@ -105,6 +104,8 @@ function App() {
 		}
 	}, [])
 
+	if (!data)
+		return (<></>)
 
 	return (
 		<div className="App">
