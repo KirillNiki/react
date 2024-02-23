@@ -22,7 +22,7 @@ const data = [
 	{ hour: "C", day: "g", value: 15 },
 	{ hour: "C", day: "g", value: 15 },
 	{ hour: "C", day: "g", value: 15 },
-	{ hour: "C", day: "g", value: 15 },
+	{ hour: "C", day: "g", value: 50 },
 	{ hour: '', day: "", value: 0 },
 ];
 
@@ -50,7 +50,7 @@ function Chart() {
 
 				<XAxis  angle={-70} dataKey="day" tickLine={false} axisLine={false} />
 				<YAxis tickLine={false} axisLine={false}
-					domain={[0, `dataMax + ${max_offset}`]}
+					domain={[`dataMin`, `dataMax + ${max_offset}`]}
 				/>
 
 				<CartesianGrid vertical={false} strokeDasharray="4" />
@@ -58,7 +58,8 @@ function Chart() {
 				<Bar
 					dataKey="value"
 					fill="url(#gradient)"
-					width={'5%'}>
+					barSize={'40%'}
+					barGap={100}>
 				</Bar>
 				<Line type="monotone" dataKey="value" stroke={`${cellColors.bigW}`} />
 			</ComposedChart>
