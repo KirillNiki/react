@@ -3,7 +3,17 @@ import React from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Label } from 'recharts';
 
 
-function ChairCell({ data }) {
+function ChairCell(props) {
+	let white_value = 100 - props.data.value
+
+	let data = [
+		props.data,
+		{
+			value: white_value,
+			color: '#ffffff',
+		}
+	]
+
 	return (
 		<ResponsiveContainer width={'100%'} style={{ aspectRatio: '1/1' }}>
 			<PieChart>
@@ -59,12 +69,14 @@ function ChairRow({ in_row_count, data }) {
 	)
 }
 
-function ChairChart({ data }) {
+function ChairChart(props) {
+	let needed_data = props.data.weights
+
 	return (
 		<ResponsiveContainer width={'100%'} aspect={'3/4'}>
-			<ChairRow in_row_count={2} data={data.weights.slice(0, 2)} />
-			<ChairRow in_row_count={4} data={data.weights.slice(2, 6)} />
-			<ChairRow in_row_count={4} data={data.weights.slice(6, 10)} />
+			<ChairRow in_row_count={2} data={needed_data.slice(0, 2)} />
+			<ChairRow in_row_count={4} data={needed_data.slice(2, 6)} />
+			<ChairRow in_row_count={4} data={needed_data.slice(6, 10)} />
 		</ResponsiveContainer>
 	)
 }

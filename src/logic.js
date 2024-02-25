@@ -55,8 +55,9 @@ function CountSensorTable(data) {
 function CountCurrentState(data) {
   let DeltaMatrix = [0, 0, 0, 0];
   let cerrentWeightDeltaProcents = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  for (let i = 0; i < data.weights.length; i++)
-    cerrentWeightDeltaProcents[i] = (data.weights[i] / data.valuePerPersent) - expectedWeightPercents[i];
+  for (let i = 0; i < data.weights.length; i++) {
+    cerrentWeightDeltaProcents[i] = (data.weights[i].weight / data.valuePerPersent) - expectedWeightPercents[i];
+  }
 
   //cerrentWeightDeltaProcents matrix pooling(4 squears)
   for (let i = 0; i < 4; i++) {
@@ -80,14 +81,14 @@ function CountCurrentState(data) {
     DeltaMatrix[i] = avarageDelta;
   }
 
-  let currentSagest = '';
+  let currentSagest = 'none';
   let currentState = State.correct;
   if (DeltaMatrix[2] > 7. || DeltaMatrix[3] > 7) currentSagest = postureSuggestions.back;
   else if (DeltaMatrix[0] > 7. || DeltaMatrix[2] > 7) currentSagest = postureSuggestions.left;
   else if (DeltaMatrix[1] > 7. || DeltaMatrix[3] > 7) currentSagest = postureSuggestions.right;
 
-  if (currentSagest !== '') currentState = State.wrong;
-  return { currentState, currentSagest }
+  if (currentSagest !== 'none') currentState = State.wrong;
+  return { state: currentState, sugest: currentSagest }
 }
 
 
@@ -106,38 +107,41 @@ function CountTimesADayHour(data) {
       dayCount++;
     }
   }
-  return { dayCount, hourCount }
+  return { day: dayCount, hour: hourCount }
 }
 
 
 function CountMinMaxVals(data) {
-  let maxVal = Number(data.infoData[0].weight);
-  let minVal = Number(data.infoData[0].weight);
+  let maxVal = Number(data.infoData[0].value);
+  let minVal = Number(data.infoData[0].value);
   let lastMin = minVal;
 
   for (let i = 1; i < data.infoData.length; i++) {
-    if (data.infoData[i].weight === 0) {
+    if (data.infoData[i].value === 0) {
       continue
     }
-    maxVal = Math.max(maxVal, data.infoData[i].weight);
-    minVal = Math.min(minVal, data.infoData[i].weight);
+    maxVal = Math.max(maxVal, data.infoData[i].value);
+    minVal = Math.min(minVal, data.infoData[i].value);
     if (minVal === 0) {
-      minVal = data.infoData[i].weight
+      minVal = data.infoData[i].value
     }
 
     if (lastMin !== 0 && minVal === 0) {
       minVal = lastMin
     }
   }
-  return { maxVal, minVal }
+  return { max: maxVal, min: minVal }
 }
 
+async function SyncronizeTrain() {
+  try {
+    await fetch(`${host}train`, { mode: 'cors' });
+  }
+  catch (error) { console.log(error) }
+}
 
-async function Train(data) {
+async function Train(data, setTrainState) {
   let isTestTrain = document.URL.includes('train');
-  let trainObj = document.getElementById('train');
-  let trainTextObj = document.getElementById('trainText');
-  let timeTextObj = document.getElementById('timeText');
 
   let SittingCounter = 0;
   let isSitting = false;
@@ -153,16 +157,16 @@ async function Train(data) {
   let sittingTimer = data.sittingTimer;
 
   if (((isTestTrain && (Date.now() - sittingTimer >= 30)) || Date.now() - sittingTimer >= maxSittingTime) && !trainStarted) {
-    trainObj.classList.remove('hidden');
-    trainTextObj.innerHTML = 'train started';
     trainStarted = true;
     stand = true;
 
-    await fetch(`${host}train`, { mode: 'cors' });
+    await SyncronizeTrain()
     sittingTimer = 0;
   }
 
   let time = '';
+  let text = '';
+
   if (trainStarted) {
     time = 0;
   } else if (isTestTrain) {
@@ -170,17 +174,16 @@ async function Train(data) {
   } else {
     time = Math.round((maxSittingTime - (Date.now() - sittingTimer)) / 1000);
   }
-  timeTextObj.innerHTML = `time before trianing(sec): ${time}`;
 
 
   if (stand && trainCounter < 6 && trainStarted) {
-    trainTextObj.innerHTML = '.stand.';
+    text = '<stand>';
     if (!isSitting) {
       trainCounter++;
       stand = false;
     }
   } else if (!stand && trainCounter < 6 && trainStarted) {
-    trainTextObj.innerHTML = '. sit .';
+    text = '< sit >';
     if (isSitting) {
       trainCounter++;
       stand = true;
@@ -191,12 +194,13 @@ async function Train(data) {
     trainStarted = false;
     trainCounter = 0;
     stand = true;
-
-    trainObj.classList.add('hidden');
   }
   if (trainCounter === 6) {
-    await fetch(`${host}train`, { mode: 'cors' });
+    await SyncronizeTrain()
   }
+
+  let visibility = trainStarted === true ? 'visible' : 'hidden'
+  setTrainState({ visibility: visibility, time: time, text: text })
 }
 
 

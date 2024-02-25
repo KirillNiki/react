@@ -3,19 +3,25 @@ import Grid from '@mui/material/Grid';
 import { useEffect, useState } from 'react';
 import './App.css';
 import Head from './components/Head';
-import Chart from './components/BarChart';
 import Paragraf from './components/Paragraf';
+import Chart from './components/BarChart';
 import ChairPannel from './components/PieChart';
 import MyButton from './components/Button';
 import ColorfulText from './components/ColorfulText';
 import { get_colors } from './components/getColor';
 import { GetData } from './DataReciver.js'
-import { Train } from './logic.js';
+import {
+	Train,
+	CountCurrentState,
+	CountTimesADayHour,
+	CountMinMaxVals,
+
+} from './logic.js';
 
 
 const myColors = get_colors()
 
-function Pannel({ data }) {
+function Pannel(props) {
 	return (
 		<div className='chair-pannel'>
 			<Paragraf
@@ -24,12 +30,12 @@ function Pannel({ data }) {
 				red={true}
 				text={'Weight distribution'}
 			/>
-			<ChairPannel data={data} />
+			<ChairPannel data={props.data} />
 		</div>
 	)
 }
 
-function WeightChart({ data }) {
+function WeightChart(props) {
 	return (
 		<div className='weight-chart' style={{ marginTop: '20%' }}>
 			<Paragraf
@@ -38,26 +44,28 @@ function WeightChart({ data }) {
 				red={true}
 				text={'Weight at spesific time'}
 			/>
-			<Chart data={data} />
+			<Chart data={props.data} />
 		</div>
 	)
 }
 
 function CurrentState(props) {
+	let current_state = CountCurrentState(props.data)
+
 	return (
 		<div className='current-state'>
 			<ColorfulText
 				color={myColors.block1}
 				text_color={myColors.text1}
-				text={`posture: ${'correct'}`}
+				text={`posture: ${current_state.state}`}
 			/>
 			<ColorfulText
 				color={myColors.block2}
 				text_color={myColors.text2}
-				text={`change posture: ${'none'}`}
+				text={`change posture: ${current_state.sugest}`}
 			/>
 			<ColorfulText color={myColors.block3}>
-				<MyButton />
+				<MyButton data={props.data} />
 			</ColorfulText>
 		</div>
 	)
@@ -91,12 +99,64 @@ function HistoryPart(props) {
 	)
 }
 
+function DayAndHour(props) {
+	let times = CountTimesADayHour(props.data)
+
+	return (
+		<div>
+			<HistoryPart main_text={'number of times'}
+				texts={[`- day ${times.day}`, `- hour ${times.hour}`]} />
+		</div>
+	)
+}
+
+function MinAndMax(props) {
+	let values = CountMinMaxVals(props.data)
+
+	return (
+		<div>
+			<HistoryPart main_text={'avarage weight'}
+				texts={[`- max ${values.max}`, `- min ${values.min}`]} />
+		</div>
+	)
+}
+
+function TrainDiv({ train_state }) {
+	return (
+		<div style={{
+			width: '100%',
+			height: '100%',
+			display: 'flex',
+			position: 'absolute',
+			zIndex: 1000,
+			alignItems: 'center',
+			visibility: `${train_state.visibility}`,
+			background: 'rgba(0, 0, 0, 0.6)',
+		}} >
+			<p style={{
+				whiteSpace: 'pre-line',
+				marginLeft: `${36}%`,
+				fontSize: '10vw',
+				fontWeight: `bold`,
+				color: `#ffffff`,
+			}}>
+				{train_state.text}
+			</p>
+		</div >
+	)
+}
+
+
 function App() {
 	const [data, setData] = useState(undefined)
+	const [train_state, setTrainState] = useState({ visibility: 'hidden', time: 'time', text: 'text' })
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-			GetData().then((res) => setData(res))
+			GetData().then((res) => {
+				setData(res)
+				Train(res, setTrainState)
+			})
 		}, 2000)
 
 		return () => {
@@ -109,6 +169,8 @@ function App() {
 
 	return (
 		<div className="App">
+			<TrainDiv train_state={train_state} />
+
 			<Head
 				aspect_ratio={5}
 				text={'Posture controll system'}
@@ -118,7 +180,7 @@ function App() {
 				<Pannel data={data} />
 
 				<div style={{ marginTop: '10%' }}>
-					<CurrentState />
+					<CurrentState data={data} />
 				</div>
 
 				<div style={{ marginTop: '25%' }}>
@@ -128,11 +190,11 @@ function App() {
 				<div style={{ margin: '4%' }}>
 					<Grid container>
 						<Grid item xs={5.5}>
-							<HistoryPart main_text={'number of times'} texts={[`- day ${0}`, `- hour ${0}`]} />
+							<DayAndHour data={data} />
 						</Grid>
 						<Grid item xs={1} />
 						<Grid item xs={5.5}>
-							<HistoryPart main_text={'avarage weight'} texts={[`- max ${0}`, `- min ${0}`]} />
+							<MinAndMax data={data} />
 						</Grid>
 					</Grid>
 				</div>
@@ -147,7 +209,7 @@ function App() {
 					<ColorfulText
 						color={myColors.block2}
 						text_color={myColors.text2}
-						text={`time before trianing(sec): ${2399}`}
+						text={`time before trianing(sec): ${train_state.time}`}
 					/>
 				</div>
 

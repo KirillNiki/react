@@ -8,7 +8,7 @@ import { get_colors } from "./getColor";
 const colors = get_colors()
 const start_text = 'Press to enter weight measurment'
 
-function MyButton() {
+function MyButton(props) {
   const [buttonState, ChangeState] = useState(true)
   const [text, ChangeText] = useState(start_text)
 
@@ -41,7 +41,7 @@ function MyButton() {
               switch (buttonState) {
                 case true:
                   alert('sit up strite to measure weight')
-                  ChangeText('567')
+                  ChangeText(`${props.data.currentWeight / 1000} kg`)
                   break
                 default:
                   ChangeText(start_text)
