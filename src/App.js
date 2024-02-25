@@ -123,7 +123,7 @@ function MinAndMax(props) {
 }
 
 function TrainDiv({ train_state }) {
-	let margin = 36
+	let margin = 38
 	if (train_state.text === 'sit') {
 		margin = 44
 	}
@@ -132,11 +132,26 @@ function TrainDiv({ train_state }) {
 		<Dialog fullScreen={true} open={train_state.open} >
 			<Paragraf
 				aspect_ratio={100}
-				marginLeft={margin}
+				marginLeft={10}
 				font_size={'10vw'}
 				red={true}
-				text={train_state.text}
+				text={'train had started'}
 			/>
+			<div
+				style={{
+					background: `${myColors.block2}`,
+					borderRadius: '10%/20%',
+					marginLeft: '5%',
+					marginRight: '5%',
+				}}>
+				<Paragraf
+					aspect_ratio={100}
+					marginLeft={margin}
+					font_size={'8vw'}
+					red={false}
+					text={train_state.text}
+				/>
+			</div>
 		</Dialog>
 	)
 }

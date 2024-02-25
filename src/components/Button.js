@@ -9,8 +9,12 @@ const colors = get_colors()
 const start_text = 'Press to enter weight measurment'
 
 function MyButton(props) {
-  const [buttonState, ChangeState] = useState(true)
-  const [text, ChangeText] = useState(start_text)
+  const [buttonState, ChangeState] = useState(false)
+  let text = start_text
+
+  if (buttonState === true) {
+    text = `${props.data.currentWeight / 1000} kg`
+  }
 
   return (
     <ResponsiveContainer aspect={1.0 / 0.15} width={'100%'}>
@@ -38,14 +42,8 @@ function MyButton(props) {
               color: colors.bigW
             }}
             onClick={() => {
-              switch (buttonState) {
-                case true:
-                  alert('sit up strite to measure weight')
-                  ChangeText(`${props.data.currentWeight / 1000} kg`)
-                  break
-                default:
-                  ChangeText(start_text)
-                  break
+              if (buttonState === false) {
+                alert('enterd weight measurment mode')
               }
               ChangeState(!buttonState)
             }}>

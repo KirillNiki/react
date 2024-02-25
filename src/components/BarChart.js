@@ -24,7 +24,7 @@ function Chart(props) {
 
 	return (
 		<ResponsiveContainer width="100%" aspect={1 / 0.75}>
-			<ComposedChart data={info_data} margin={{ left: -20, right: 10, top: 20 }} barCategoryGap={'35%'}>
+			<ComposedChart data={info_data} margin={{ left: -20, right: 10, top: 20 }} barCategoryGap={'30%'}>
 				<defs>
 					<linearGradient id="gradient" x1='0' y1='0' x2='0' y2='1'>
 						<stop offset="5%" stopColor={cellColors.avarageW} stopOpacity={1} />
@@ -32,9 +32,9 @@ function Chart(props) {
 					</linearGradient>
 				</defs>
 
-				<XAxis angle={-70} dataKey="time" tickLine={false} axisLine={false} fontSize={'120%'} />
-				<YAxis tickLine={false} axisLine={false}
-					domain={[`dataMin`, `dataMax + ${max_offset}`]}
+				<XAxis angle={-70} dataKey="time" tickLine={false} axisLine={false} fontSize='3vw'/>
+				<YAxis tickLine={false} axisLine={false} fontSize='2vh'
+					domain={[0, `dataMax + ${max_offset}`]}
 				/>
 
 				<CartesianGrid vertical={false} strokeDasharray="4" />
@@ -44,7 +44,7 @@ function Chart(props) {
 					fill="url(#gradient)"
 				>
 				</Bar>
-				<Line type="monotone" dataKey="value" stroke={`${cellColors.bigW}`} />
+				<Line type="monotone" dataKey="value" stroke={`${cellColors.bigW}`} strokeWidth='0.25vw'/>
 			</ComposedChart>
 		</ResponsiveContainer>
 	);

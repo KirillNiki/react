@@ -146,7 +146,7 @@ async function Train(data, setTrainState) {
   let SittingCounter = 0;
   let isSitting = false;
   for (let i = 0; i < data.weights.length; i++) {
-    if (data.weights[i] > 400)
+    if (data.weights[i].weight > 400)
       SittingCounter++;
 
     if (SittingCounter >= 4) {
