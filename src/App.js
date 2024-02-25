@@ -17,6 +17,7 @@ import {
 	CountMinMaxVals,
 
 } from './logic.js';
+import Dialog from '@mui/material/Dialog';
 
 
 const myColors = get_colors()
@@ -122,34 +123,28 @@ function MinAndMax(props) {
 }
 
 function TrainDiv({ train_state }) {
+	let margin = 36
+	if (train_state.text === 'sit') {
+		margin = 44
+	}
+
 	return (
-		<div style={{
-			width: '100%',
-			overflowY: 'scroll',
-			display: 'flex',
-			position: 'absolute',
-			zIndex: 1000,
-			alignItems: 'center',
-			visibility: `${train_state.visibility}`,
-			background: 'rgba(0, 0, 0, 0.6)',
-		}} >
-			<p style={{
-				whiteSpace: 'pre-line',
-				marginLeft: `${36}%`,
-				fontSize: '10vw',
-				fontWeight: `bold`,
-				color: `#ffffff`,
-			}}>
-				{train_state.text}
-			</p>
-		</div >
+		<Dialog fullScreen={true} open={train_state.open} >
+			<Paragraf
+				aspect_ratio={100}
+				marginLeft={margin}
+				font_size={'10vw'}
+				red={true}
+				text={train_state.text}
+			/>
+		</Dialog>
 	)
 }
 
 
 function App() {
 	const [data, setData] = useState(undefined)
-	const [train_state, setTrainState] = useState({ visibility: 'hidden', time: 'time', text: 'text' })
+	const [train_state, setTrainState] = useState({ open: false, time: 'time', text: 'text' })
 
 	useEffect(() => {
 		const interval = setInterval(() => {

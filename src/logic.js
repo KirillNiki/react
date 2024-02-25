@@ -177,13 +177,13 @@ async function Train(data, setTrainState) {
 
 
   if (stand && trainCounter < 6 && trainStarted) {
-    text = '<stand>';
+    text = 'stand';
     if (!isSitting) {
       trainCounter++;
       stand = false;
     }
   } else if (!stand && trainCounter < 6 && trainStarted) {
-    text = '< sit >';
+    text = 'sit';
     if (isSitting) {
       trainCounter++;
       stand = true;
@@ -199,8 +199,8 @@ async function Train(data, setTrainState) {
     await SyncronizeTrain()
   }
 
-  let visibility = trainStarted === true ? 'visible' : 'hidden'
-  setTrainState({ visibility: visibility, time: time, text: text })
+  let open = trainStarted === true ? true : false
+  setTrainState({ open: open, time: time, text: text })
 }
 
 

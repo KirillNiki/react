@@ -8,7 +8,11 @@ const colors = get_colors()
 function Paragraf(props) {
 	let font_color = props.red ? colors.smallW : 'black'
 	let font_weight = props.red ? 'bold' : 'normal'
+	let font_size = '4vw'
 
+	if (props.font_size !== undefined) {
+		font_size = props.font_size
+	}
 	if (props.text_color !== undefined) {
 		font_color = props.text_color
 	}
@@ -26,7 +30,7 @@ function Paragraf(props) {
 			<p style={{
 				whiteSpace: 'pre-line',
 				marginLeft: `${props.marginLeft}%`,
-				fontSize: '4vw',
+				fontSize: `${font_size}`,
 				fontWeight: `${font_weight}`,
 				color: `${font_color}`,
 			}}>
