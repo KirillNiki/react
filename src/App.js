@@ -125,7 +125,7 @@ function TrainDiv({ train_state }) {
 	return (
 		<div style={{
 			width: '100%',
-			height: '100%',
+			overflowY: 'scroll',
 			display: 'flex',
 			position: 'absolute',
 			zIndex: 1000,
