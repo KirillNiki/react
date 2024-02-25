@@ -15,7 +15,7 @@ import { Train } from './logic.js';
 
 const myColors = get_colors()
 
-function Pannel(props) {
+function Pannel({ data }) {
 	return (
 		<div className='chair-pannel'>
 			<Paragraf
@@ -24,12 +24,12 @@ function Pannel(props) {
 				red={true}
 				text={'Weight distribution'}
 			/>
-			<ChairPannel data={props.data} />
+			<ChairPannel data={data} />
 		</div>
 	)
 }
 
-function WeightChart(props) {
+function WeightChart({ data }) {
 	return (
 		<div className='weight-chart' style={{ marginTop: '20%' }}>
 			<Paragraf
@@ -38,7 +38,7 @@ function WeightChart(props) {
 				red={true}
 				text={'Weight at spesific time'}
 			/>
-			<Chart data={props.data} />
+			<Chart data={data} />
 		</div>
 	)
 }
@@ -104,7 +104,7 @@ function App() {
 		}
 	}, [])
 
-	if (!data)
+	if (data === undefined)
 		return (<></>)
 
 	return (

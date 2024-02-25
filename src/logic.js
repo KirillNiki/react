@@ -201,17 +201,17 @@ async function Train(data) {
 
 
 function TwoMaxAvarage(data) {
-  let prevMax = data.weights[0];
-  let Max = data.weights[1];
+  let prevMax = data.weights[0].weight;
+  let Max = data.weights[1].weight;
 
   for (let i = 2; i < data.weights.length; i++) {
-    let val = data.weights[i];
+    let weight = data.weights[i].weight;
 
-    if (Max < val) {
+    if (Max < weight) {
       prevMax = Max;
-      Max = val;
-    } else if (prevMax < val) {
-      prevMax = val;
+      Max = weight;
+    } else if (prevMax < weight) {
+      prevMax = weight;
     } else
       continue;
   }

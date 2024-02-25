@@ -19,12 +19,19 @@ function data_color(value) {
 }
 
 async function GetData() {
-  let data = {
-    weights: Array(10).fill({ weight: 0, value: 0, color: 0 }),
-    infoData: Array(10).fill({ time: 0, value: 0 }),
-    allValuesSum: 0,
-    valuePerPersent: 0
-  }
+  // let data
+  // if (data_in_use === undefined) {
+    let data = {
+      weights: Array(10).fill({ weight: 0, value: 0, color: 0 }),
+      infoData: Array(10).fill({ time: 0, value: 0 }),
+      allValuesSum: 0,
+      valuePerPersent: 0,
+      sittingTimer: 0,
+    }
+  // }
+  // else {
+  //   data = { ...data_in_use }
+  // }
 
   try {
     let dataHeaders = await fetch(`${host}data`, { mode: 'cors' })
@@ -44,7 +51,10 @@ async function GetData() {
   data.sittingTimer = data.sittingTimer * 1000
 
   for (let i = 0; i < data.weights.length; i++) {
-    data.weights[i].value = data.weights[i].weight / data.valuePerPersent
+    data.weights[i].value = 0
+    if (data.valuePerPersent > 0) {
+      data.weights[i].value = data.weights[i].weight / data.valuePerPersent
+    }
     data.weights[i].color = data_color(data.weights[i].value)
   }
 

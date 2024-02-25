@@ -3,11 +3,11 @@ import React from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer, Label } from 'recharts';
 
 
-function ChairCell(props) {
+function ChairCell({ data }) {
 	return (
 		<ResponsiveContainer width={'100%'} style={{ aspectRatio: '1/1' }}>
 			<PieChart>
-				<Pie data={props.data}
+				<Pie data={data}
 					dataKey={'value'}
 					outerRadius={'100%'}
 					innerRadius={'80%'}
@@ -18,12 +18,12 @@ function ChairCell(props) {
 				>
 					<Label
 						className='text'
-						value={`${props.data[0].value}%`}
+						value={`${data[0].value}%`}
 						position="center"
 						fontSize='4vw'
 						color="#ffffff"
 					/>
-					{props.data.map((elem, index) => (
+					{data.map((elem, index) => (
 						<Cell fill={elem.color} key={index}></Cell>
 					))}
 				</Pie>
@@ -32,9 +32,8 @@ function ChairCell(props) {
 	)
 }
 
-function ChairRow(props) {
+function ChairRow({ in_row_count, data }) {
 	let iterable = Array(4).fill(0)
-	let in_row_count = props.in_row_count
 	let data_index = 0
 
 	return (
@@ -46,7 +45,7 @@ function ChairRow(props) {
 					cell_object = (<div />)
 				}
 				else {
-					cell_object = (< ChairCell data={props.data[data_index]} />)
+					cell_object = (< ChairCell data={data[data_index]} />)
 					data_index++
 				}
 
@@ -60,12 +59,12 @@ function ChairRow(props) {
 	)
 }
 
-function ChairChart(props) {
+function ChairChart({ data }) {
 	return (
 		<ResponsiveContainer width={'100%'} aspect={'3/4'}>
-			<ChairRow in_row_count={2} data={props.data.weights.slice(0, 2)} />
-			<ChairRow in_row_count={4} data={props.data.weights.slice(2, 6)} />
-			<ChairRow in_row_count={4} data={props.data.weights.slice(6, 10)} />
+			<ChairRow in_row_count={2} data={data.weights.slice(0, 2)} />
+			<ChairRow in_row_count={4} data={data.weights.slice(2, 6)} />
+			<ChairRow in_row_count={4} data={data.weights.slice(6, 10)} />
 		</ResponsiveContainer>
 	)
 }
