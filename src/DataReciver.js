@@ -1,7 +1,7 @@
 import { get_colors } from "./components/getColor";
 import { TwoMaxAvarage } from "./logic";
 
-const host = `http://localhost:9000/`
+const host = `http://192.168.0.109:9000/`
 const factor = 34;
 const colors = get_colors()
 
@@ -57,7 +57,8 @@ async function GetData() {
   }
 
   for (var i = 0; i < data.infoData.length; i++) {
-    data.infoData[i].time = data.infoData[i].time * 1000
+    let time = new Date(data.infoData[i].time * 1000)
+    data.infoData[i].time = `${time.getDate()}.${time.getMonth()} ${time.getHours()}:${time.getMinutes()}`
   }
   return data
 }

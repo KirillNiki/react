@@ -1,6 +1,6 @@
-import MyDrawer from './components/drawer';
+import MyDrawer from './components/MyDrawer.js';
 import Grid from '@mui/material/Grid';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './App.css';
 import Head from './components/Head';
 import Paragraf from './components/Paragraf';
@@ -25,14 +25,24 @@ const myColors = get_colors()
 function Pannel(props) {
 	return (
 		<div className='chair-pannel'>
-			<Paragraf
-				aspect_ratio={10}
-				marginLeft={5}
-				red={true}
-				text={'Weight distribution'}
-			/>
-			<ChairPannel data={props.data} />
-		</div>
+			<Grid container alignItems={'center'}>
+				<Grid item xs={8}>
+					<Paragraf
+						aspect_ratio={10}
+						marginLeft={5}
+						red={true}
+						text={'Weight distribution'}
+					/>
+				</Grid>
+				<Grid item xs={4} alignItems={'center'} >
+					<MyDrawer />
+				</Grid>
+			</Grid>
+			<ChairPannel data={props.data}
+				main_ref={props.main_ref}
+				history_ref={props.history_ref}
+				stat_ref={props.stat_ref} />
+		</div >
 	)
 }
 
@@ -161,6 +171,10 @@ function App() {
 	const [data, setData] = useState(undefined)
 	const [train_state, setTrainState] = useState({ open: false, time: 'time', text: 'text' })
 
+	const main_ref = ''
+	const history_ref = ''
+	const stat_ref = ''
+
 	useEffect(() => {
 		const interval = setInterval(() => {
 			GetData().then((res) => {
@@ -187,7 +201,7 @@ function App() {
 				marginLeft={50}
 			/>
 			<div className='body' style={{ paddingLeft: '3%', paddingRight: '3%' }}>
-				<Pannel data={data} />
+				<Pannel ref={main_ref} main_ref={main_ref} history_ref={history_ref} stat_ref={stat_ref} data={data} />
 
 				<div style={{ marginTop: '10%' }}>
 					<CurrentState data={data} />
@@ -197,7 +211,7 @@ function App() {
 					<Head aspect_ratio={8} text='history' marginLeft='42' />
 				</div>
 
-				<div style={{ margin: '4%' }}>
+				<div ref={history_ref} style={{ margin: '4%' }}>
 					<Grid container>
 						<Grid item xs={5.5}>
 							<DayAndHour data={data} />
@@ -209,7 +223,7 @@ function App() {
 					</Grid>
 				</div>
 
-				<WeightChart data={data} />
+				<WeightChart ref={stat_ref} data={data} />
 				<div style={{ marginTop: '10%' }}>
 					<ColorfulText
 						color={myColors.block2}
@@ -219,7 +233,7 @@ function App() {
 					<ColorfulText
 						color={myColors.block2}
 						text_color={myColors.text2}
-						text={`time before trianing(sec): ${train_state.time}`}
+						text={`time before trianing in seconds: ${train_state.time}`}
 					/>
 				</div>
 
