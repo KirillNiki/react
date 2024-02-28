@@ -59,7 +59,7 @@ function Chart(props) {
 					</linearGradient>
 				</defs>
 
-				<XAxis angle={-70} dataKey="time" tickLine={false} axisLine={false} fontSize='3vw' />
+				<XAxis dataKey="day" tickLine={false} axisLine={false} fontSize='2vh' />
 				<YAxis tickLine={false} axisLine={false} fontSize='2vh'
 					domain={[0, `dataMax + ${max_offset}`]}
 				/>

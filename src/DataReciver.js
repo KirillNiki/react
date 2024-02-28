@@ -5,6 +5,16 @@ const host = `http://192.168.0.109:9000/`
 const factor = 34;
 const colors = get_colors()
 
+const weekDays = [
+  'Sun',
+  'Mon',
+  'Tue',
+  'Wed',
+  'Fir',
+  'Fri',
+  'Sat',
+]
+
 
 function data_color(value) {
   let color = colors.avarageW
@@ -58,7 +68,8 @@ async function GetData() {
 
   for (var i = 0; i < data.infoData.length; i++) {
     let time = new Date(data.infoData[i].time * 1000)
-    data.infoData[i].time = `${time.getDate()}.${time.getMonth()} ${time.getHours()}:${time.getMinutes()}`
+    data.infoData[i].time = `${time.getDate()} ${time.getHours()}:${time.getMinutes()}`
+    data.infoData[i].day = `${weekDays[time.getDay()]}`
   }
   return data
 }
