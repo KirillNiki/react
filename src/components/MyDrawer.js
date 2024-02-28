@@ -11,9 +11,8 @@ import Menu from '@mui/icons-material/Menu';
 import InfoIcon from '@mui/icons-material/Info';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import FolderOpenIcon from '@mui/icons-material/FolderOpen';
-import { PropaneSharp } from '@mui/icons-material';
 
-function DrawerList({ toggleDrawer, main_ref, historu_ref, stat_ref }) {
+function DrawerList({ toggleDrawer, main_ref, history_ref, stat_ref }) {
 
   return (<Box
     sx={{ width: 250 }}
@@ -24,7 +23,7 @@ function DrawerList({ toggleDrawer, main_ref, historu_ref, stat_ref }) {
     <List>
       <ListItem disablePadding>
         <ListItemButton onClick={() => {
-          // main_ref.current?.scrollIntoView({ behavior: 'smooth' })
+          main_ref.current?.scrollIntoView({ behavior: 'smooth' })
         }}>
           <ListItemIcon>
             <InfoIcon />
@@ -34,7 +33,9 @@ function DrawerList({ toggleDrawer, main_ref, historu_ref, stat_ref }) {
       </ListItem>
 
       <ListItem disablePadding>
-        <ListItemButton>
+        <ListItemButton onClick={() => {
+          history_ref.current?.scrollIntoView({ behavior: 'smooth' })
+        }}>
           <ListItemIcon>
             <FolderOpenIcon />
           </ListItemIcon>
@@ -43,7 +44,9 @@ function DrawerList({ toggleDrawer, main_ref, historu_ref, stat_ref }) {
       </ListItem>
 
       <ListItem disablePadding>
-        <ListItemButton>
+        <ListItemButton onClick={() => {
+          stat_ref.current?.scrollIntoView({ behavior: 'smooth' })
+        }}>
           <ListItemIcon>
             <EqualizerIcon />
           </ListItemIcon>
@@ -79,7 +82,7 @@ export default function MyDrawer(props) {
         open={isOpened}
         onClose={toggleDrawer(false)}
       >
-        <DrawerList toggleDrawer={toggleDrawer} />
+        <DrawerList toggleDrawer={toggleDrawer} main_ref={props.main_ref} history_ref={props.history_ref} stat_ref={props.stat_ref} />
       </Drawer>
     </div>
   );

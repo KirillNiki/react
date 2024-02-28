@@ -35,20 +35,19 @@ function Pannel(props) {
 					/>
 				</Grid>
 				<Grid item xs={4} alignItems={'center'} >
-					<MyDrawer />
+					<MyDrawer main_ref={props.main_ref}
+						history_ref={props.history_ref}
+						stat_ref={props.stat_ref} />
 				</Grid>
 			</Grid>
-			<ChairPannel data={props.data}
-				main_ref={props.main_ref}
-				history_ref={props.history_ref}
-				stat_ref={props.stat_ref} />
+			<ChairPannel data={props.data} />
 		</div >
 	)
 }
 
 function WeightChart(props) {
 	return (
-		<div className='weight-chart' style={{ marginTop: '20%' }}>
+		<div className='weight-chart'>
 			<Paragraf
 				aspect_ratio={10}
 				marginLeft={5}
@@ -171,9 +170,9 @@ function App() {
 	const [data, setData] = useState(undefined)
 	const [train_state, setTrainState] = useState({ open: false, time: 'time', text: 'text' })
 
-	const main_ref = ''
-	const history_ref = ''
-	const stat_ref = ''
+	const main_ref = useRef(null)
+	const history_ref = useRef(null)
+	const stat_ref = useRef(null)
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -196,22 +195,23 @@ function App() {
 			<TrainDiv train_state={train_state} />
 
 			<Head
+				ref={main_ref}
 				aspect_ratio={5}
 				text={'Posture controll system'}
 				marginLeft={50}
 			/>
 			<div className='body' style={{ paddingLeft: '3%', paddingRight: '3%' }}>
-				<Pannel ref={main_ref} main_ref={main_ref} history_ref={history_ref} stat_ref={stat_ref} data={data} />
+				<Pannel main_ref={main_ref} history_ref={history_ref} stat_ref={stat_ref} data={data} />
 
 				<div style={{ marginTop: '10%' }}>
 					<CurrentState data={data} />
 				</div>
 
-				<div style={{ marginTop: '25%' }}>
+				<div ref={history_ref} style={{ marginTop: '25%' }}>
 					<Head aspect_ratio={8} text='history' marginLeft='42' />
 				</div>
 
-				<div ref={history_ref} style={{ margin: '4%' }}>
+				<div style={{ margin: '4%' }}>
 					<Grid container>
 						<Grid item xs={5.5}>
 							<DayAndHour data={data} />
@@ -223,7 +223,11 @@ function App() {
 					</Grid>
 				</div>
 
-				<WeightChart ref={stat_ref} data={data} />
+				<div style={{ marginTop: '25%' }} ref={stat_ref}>
+					<Head aspect_ratio={8} text='statistics' marginLeft='38' />
+				</div>
+				<WeightChart refer={stat_ref} data={data} />
+
 				<div style={{ marginTop: '10%' }}>
 					<ColorfulText
 						color={myColors.block2}
