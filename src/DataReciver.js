@@ -1,7 +1,7 @@
 import { get_colors } from "./components/getColor";
 import { TwoMaxAvarage } from "./logic";
 
-const host = `http://192.168.0.109:9000/`
+const host = `https://192.168.0.1/`
 const factor = 34;
 const colors = get_colors()
 
@@ -29,8 +29,6 @@ function data_color(value) {
 }
 
 async function GetData() {
-  // let data
-  // if (data_in_use === undefined) {
   let data = {
     weights: Array(10).fill({ weight: 0, value: 0, color: 0 }),
     infoData: Array(10).fill({ time: 0, value: 0 }),
@@ -38,10 +36,6 @@ async function GetData() {
     valuePerPersent: 0,
     sittingTimer: 0,
   }
-  // }
-  // else {
-  //   data = { ...data_in_use }
-  // }
 
   try {
     let dataHeaders = await fetch(`${host}data`, { mode: 'cors' })

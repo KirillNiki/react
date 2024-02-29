@@ -9,16 +9,11 @@ import {
 	ResponsiveContainer
 } from "recharts";
 import Paragraf from "./Paragraf";
+import { get_colors } from "./getColor";
 
-var style = getComputedStyle(document.body)
-const cellColors = {
-	smallW: style.getPropertyValue('--smallW-color'),
-	avarageW: style.getPropertyValue('--avarageW-color'),
-	bigW: style.getPropertyValue('--bigW-color')
-}
 
 const max_offset = 10
-
+let cellColors = get_colors()
 
 function CustomTooltip({ active, payload, label }) {
 	let value = payload.length > 0 ? payload[0].value : ''
@@ -32,7 +27,7 @@ function CustomTooltip({ active, payload, label }) {
 		}}>
 			<Paragraf
 				font_size={'3vw'}
-				text={`date: ${label}`}
+				text={`day: ${label}`}
 				marginLeft={5}
 			/>
 			<Paragraf

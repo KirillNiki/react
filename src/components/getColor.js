@@ -1,18 +1,17 @@
 
 
-var style = getComputedStyle(document.body)
 const cellColors = {
-  smallW: style.getPropertyValue('--smallW-color'),
-  avarageW: style.getPropertyValue('--avarageW-color'),
-  bigW: style.getPropertyValue('--bigW-color'),
+  smallW: '#4e001a',
+  avarageW: '#83002c',
+  bigW: '#360011',
 
-  block1: style.getPropertyValue('--color-block1'),
-  block2: style.getPropertyValue('--color-block2'),
-  block3: style.getPropertyValue('--color-block2'),
+  block1: '#ffee0321',
+  block2: 'rgba(168,0,56,.068)',
+  block3: 'rgba(168,0,56,.068)',
 
-  text1: style.getPropertyValue('--color-text1'),
-  text2: style.getPropertyValue('--color-text2'),
-  text3: style.getPropertyValue('--color-text2'),
+  text1: '#ffc400c2',
+  text2: '#4e001a',
+  text3: '#4e001a',
 }
 
 
