@@ -8,7 +8,11 @@ const colors = get_colors()
 
 function InstallButton(props) {
   return (
-    <ResponsiveContainer id={'install_button'} aspect={1.0 / 0.15} width={'100%'}>
+    <ResponsiveContainer
+      id='install_button_div'
+      aspect={1.0 / 0.15}
+      width={'100%'}
+    >
       <Grid container alignItems='center'>
 
         <Grid item xs={9}>
@@ -23,6 +27,7 @@ function InstallButton(props) {
 
         <Grid item xs={3}>
           <Button
+            id='install_button'
             size="lg"
             variant="outlined"
             color='inherit'
