@@ -31,7 +31,7 @@ function data_color(value) {
 async function GetData() {
   let data = {
     weights: Array(10).fill({ weight: 0, value: 0, color: 0 }),
-    infoData: Array(10).fill({ time: 0, value: 0 }),
+    infoData: Array(10).fill({ time: 0, time_string: '', value: 0 }),
     allValuesSum: 0,
     valuePerPersent: 0,
     sittingTimer: 0,
@@ -61,9 +61,14 @@ async function GetData() {
   }
 
   for (var i = 0; i < data.infoData.length; i++) {
-    let time = new Date(data.infoData[i].time * 1000)
-    data.infoData[i].time = `${time.getDate()} ${time.getHours()}:${time.getMinutes()}`
-    data.infoData[i].day = `${weekDays[time.getDay()]}`
+    if (data.infoData[i].time !== 0) {
+      let time = new Date(data.infoData[i].time * 1000)
+      data.infoData[i].time_string = `${time.getDate()} ${time.getHours()}:${time.getMinutes()}`
+      data.infoData[i].day = `${weekDays[time.getDay()]}`
+    } else {
+      data.infoData[i].time_string = '0'
+      data.infoData[i].day = '0'
+    }
   }
   return data
 }

@@ -18,6 +18,7 @@ import {
 
 } from './logic.js';
 import Dialog from '@mui/material/Dialog';
+import InstallButton from './components/InstallButton.js';
 
 
 const myColors = get_colors()
@@ -239,6 +240,11 @@ function App() {
 						text_color={myColors.text2}
 						text={`time before trianing in seconds: ${train_state.time}`}
 					/>
+					<ColorfulText
+						color={myColors.block1}
+					>
+						<InstallButton />
+					</ColorfulText>
 				</div>
 
 				<div style={{ height: '100px' }} />
