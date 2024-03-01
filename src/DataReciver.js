@@ -1,15 +1,13 @@
 import { get_colors } from "./components/getColor";
 import { TwoMaxAvarage } from "./logic";
 
-let install_event
-let install_button_div = document.getElementById('install_button_div')
-
-window.addEventListener('beforeinstallprompt', function (event) {
-  event.preventDefault()
-  install_event = event
-  // install_button_div.style.visibility = 'visible'
-})
-
+const default_data = {
+  weights: Array(10).fill({ weight: 0, value: 0, color: 0 }),
+  infoData: Array(10).fill({ time: 0, time_string: '', value: 0 }),
+  allValuesSum: 0,
+  valuePerPersent: 0,
+  sittingTimer: Date.now() / 1000,
+}
 
 
 // const host = `http://localhost:9000/`
@@ -41,13 +39,7 @@ function data_color(value) {
 }
 
 async function GetData() {
-  let data = {
-    weights: Array(10).fill({ weight: 0, value: 0, color: 0 }),
-    infoData: Array(10).fill({ time: 0, time_string: '', value: 0 }),
-    allValuesSum: 0,
-    valuePerPersent: 0,
-    sittingTimer: Date.now() / 1000,
-  }
+  let data = default_data
 
   try {
     let dataHeaders = await fetch(`${host}data`, { mode: 'cors' })
@@ -103,5 +95,5 @@ fetch(`${host}watchTime`, {
 export {
   host,
   GetData,
-  install_event,
+  default_data,
 }

@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import { Button } from "@mui/material";
 import { ResponsiveContainer } from "recharts";
 import Grid from '@mui/material/Grid';
@@ -6,28 +7,49 @@ import { get_colors } from "./getColor";
 
 const colors = get_colors()
 
-function InstallButton(props) {
+
+function InstallPWA() {
+  const [supportsPWA, setSupportsPWA] = useState(false);
+  const [promptInstall, setPromptInstall] = useState(null);
+
+  useEffect(() => {
+    const handler = e => {
+      e.preventDefault();
+      setSupportsPWA(true);
+      setPromptInstall(e);
+    };
+    window.addEventListener("beforeinstallprompt", handler);
+
+    return () => window.removeEventListener("transitionend", handler);
+  }, []);
+
+  const onClick = evt => {
+    evt.preventDefault();
+    if (!promptInstall) {
+      return;
+    }
+    promptInstall.prompt();
+  };
+  if (!supportsPWA) {
+    return null;
+  }
+
   return (
-    <ResponsiveContainer
-      id='install_button_div'
-      aspect={1.0 / 0.15}
-      width={'100%'}
-    >
+    <ResponsiveContainer aspect={1.0 / 0.15} width={'100%'}>
       <Grid container alignItems='center'>
 
         <Grid item xs={9}>
           <Paragraf
             aspect_ratio={8}
             marginLeft={4}
-            text_color={`${colors.text1}`}
-            font_weight={'bold'}
+            red={true}
+            text_color={colors.text1}
             text={'Press to install'}
           />
         </Grid>
 
         <Grid item xs={3}>
           <Button
-            id='install_button'
             size="lg"
             variant="outlined"
             color='inherit'
@@ -37,17 +59,13 @@ function InstallButton(props) {
               aspectRatio: 3,
               color: colors.text1
             }}
-            onClick={() => {
-              let elem = document.getElementById('install_button_div')
-              elem.style.visibility = 'hidden'
-              props.install_event.prompt()
-            }}>
+            onClick={onClick}>
             click
           </Button>
         </Grid>
 
       </Grid>
     </ResponsiveContainer>
-  )
-}
-export default InstallButton
+  );
+};
+export default InstallPWA;
