@@ -46,7 +46,7 @@ async function GetData() {
     infoData: Array(10).fill({ time: 0, time_string: '', value: 0 }),
     allValuesSum: 0,
     valuePerPersent: 0,
-    sittingTimer: Date.now(),
+    sittingTimer: Date.now() / 1000,
   }
 
   try {

@@ -172,6 +172,8 @@ async function Train(data, setTrainState) {
   } else if (isTestTrain) {
     time = Math.round((30 - (Date.now() - sittingTimer)) / 1000);
   } else {
+    console.log(Date.now() - sittingTimer)
+    console.log(maxSittingTime)
     time = Math.round((maxSittingTime - (Date.now() - sittingTimer)) / 1000);
   }
 
