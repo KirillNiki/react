@@ -29,7 +29,7 @@ function InstallPWA() {
       return;
     }
     promptInstall.prompt();
-  };
+  }
   if (!supportsPWA) {
     return null;
   }
