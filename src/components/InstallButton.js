@@ -36,6 +36,11 @@ function InstallButton(props) {
               fontSize: '2.4vw',
               aspectRatio: 3,
               color: colors.text1
+            }}
+            onClick={() => {
+              let elem = document.getElementById('install_button_div')
+              elem.style.visibility = 'hidden'
+              props.install_event.prompt()
             }}>
             click
           </Button>

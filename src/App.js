@@ -9,7 +9,7 @@ import ChairPannel from './components/PieChart';
 import MyButton from './components/Button';
 import ColorfulText from './components/ColorfulText';
 import { get_colors } from './components/getColor';
-import { GetData } from './DataReciver.js'
+import { GetData, install_event } from './DataReciver.js'
 import {
 	Train,
 	CountCurrentState,
@@ -168,12 +168,23 @@ function TrainDiv({ train_state }) {
 
 
 function App() {
+	const [is_loaded, setIsLoaded] = useState(false)
 	const [data, setData] = useState(undefined)
 	const [train_state, setTrainState] = useState({ open: false, time: 'time', text: 'text' })
 
 	const main_ref = useRef(null)
 	const history_ref = useRef(null)
 	const stat_ref = useRef(null)
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			setIsLoaded(true)
+		}, 1000)
+
+		return () => {
+			clearTimeout(timeout)
+		}
+	}, [is_loaded])
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -243,7 +254,7 @@ function App() {
 					<ColorfulText
 						color={myColors.block1}
 					>
-						<InstallButton />
+						<InstallButton event={install_event} />
 					</ColorfulText>
 				</div>
 

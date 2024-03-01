@@ -1,7 +1,19 @@
 import { get_colors } from "./components/getColor";
 import { TwoMaxAvarage } from "./logic";
 
-const host = `https://192.168.0.1/`
+let install_event
+let install_button_div = document.getElementById('install_button_div')
+
+window.addEventListener('beforeinstallprompt', function (event) {
+  event.preventDefault()
+  install_event = event
+  install_button_div.style.visibility = 'visible'
+})
+
+
+
+const host = `http://localhost:9000/`
+// const host = `https://192.168.0.1/`
 const factor = 34;
 const colors = get_colors()
 
@@ -91,4 +103,5 @@ fetch(`${host}watchTime`, {
 export {
   host,
   GetData,
+  install_event,
 }
