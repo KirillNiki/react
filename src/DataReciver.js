@@ -7,13 +7,13 @@ let install_button_div = document.getElementById('install_button_div')
 window.addEventListener('beforeinstallprompt', function (event) {
   event.preventDefault()
   install_event = event
-  install_button_div.style.visibility = 'visible'
+  // install_button_div.style.visibility = 'visible'
 })
 
 
 
-const host = `http://localhost:9000/`
-// const host = `https://192.168.0.1/`
+// const host = `http://localhost:9000/`
+const host = `https://192.168.0.1/`
 const factor = 34;
 const colors = get_colors()
 
@@ -46,7 +46,7 @@ async function GetData() {
     infoData: Array(10).fill({ time: 0, time_string: '', value: 0 }),
     allValuesSum: 0,
     valuePerPersent: 0,
-    sittingTimer: 0,
+    sittingTimer: Date.now(),
   }
 
   try {
