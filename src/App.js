@@ -169,7 +169,7 @@ function TrainDiv({ train_state }) {
 
 function App() {
 	const [is_loaded, setIsLoaded] = useState(false)
-	const [data, setData] = useState(default_data)
+	const [data, setData] = useState(default_data())
 	const [train_state, setTrainState] = useState({ open: false, time: 'time', text: 'text' })
 
 	const main_ref = useRef(null)
