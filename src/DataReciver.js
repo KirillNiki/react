@@ -1,12 +1,14 @@
 import { get_colors } from "./components/getColor";
 import { TwoMaxAvarage } from "./logic";
 
-const default_data = {
-  weights: Array(10).fill({ weight: 0, value: 0, color: 0 }),
-  infoData: Array(10).fill({ time: 0, time_string: '', value: 0 }),
-  allValuesSum: 0,
-  valuePerPersent: 0,
-  sittingTimer: Date.now() / 1000,
+const default_data = () => {
+  return {
+    weights: Array(10).fill({ weight: 0, value: 0, color: 0 }),
+    infoData: Array(10).fill({ time: 0, time_string: '', value: 0 }),
+    allValuesSum: 0,
+    valuePerPersent: 0,
+    sittingTimer: Date.now() / 1000,
+  }
 }
 
 
