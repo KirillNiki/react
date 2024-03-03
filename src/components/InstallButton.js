@@ -26,18 +26,25 @@ function InstallPWA() {
     };
   }, []);
 
-  const onClick = evt => {
+  const onClick = async (evt) => {
     evt.preventDefault();
     if (!promptInstall) {
       return;
     }
     promptInstall.prompt();
-    setPressed(true)
+
+    const { outcome } = await promptInstall.userChoice
+    if (outcome === 'accepted') {
+      setPressed(true)
+    }
   }
 
-  if (!supportsPWA || pressed) {
+  if (!supportsPWA) {
     return null;
   }
+
+  if (pressed)
+    return <></>
 
   return (
     <ResponsiveContainer aspect={1.0 / 0.15} width={'100%'}>
