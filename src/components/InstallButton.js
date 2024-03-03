@@ -9,6 +9,7 @@ const colors = get_colors()
 
 
 function InstallPWA() {
+  const [pressed, setPressed] = useState(false)
   const [supportsPWA, setSupportsPWA] = useState(false);
   const [promptInstall, setPromptInstall] = useState(null);
 
@@ -20,7 +21,9 @@ function InstallPWA() {
     };
     window.addEventListener("beforeinstallprompt", handler);
 
-    return () => window.removeEventListener("transitionend", handler);
+    return () => {
+      window.removeEventListener("transitionend", handler)
+    };
   }, []);
 
   const onClick = evt => {
@@ -29,8 +32,10 @@ function InstallPWA() {
       return;
     }
     promptInstall.prompt();
+    setPressed(true)
   }
-  if (!supportsPWA) {
+
+  if (!supportsPWA || pressed) {
     return null;
   }
 
