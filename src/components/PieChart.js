@@ -18,6 +18,7 @@ function ChairCell(props) {
 		<ResponsiveContainer width={'100%'} style={{ aspectRatio: '1/1' }}>
 			<PieChart>
 				<Pie data={data}
+					animationDuration={400}
 					dataKey={'value'}
 					outerRadius={'100%'}
 					innerRadius={'80%'}

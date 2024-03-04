@@ -58,7 +58,7 @@ async function GetData() {
   data.valuePerPersent = data.allValuesSum / 100
   let current_weight = TwoMaxAvarage(data) * factor
   data.currentWeight = current_weight !== undefined ? current_weight : 0
-  data.sittingTimer = data.sittingTimer * 1000
+  data.sittingTimer = data.sittingTimer !== 0 ? data.sittingTimer * 1000 : Date.now()
 
   for (let i = 0; i < data.weights.length; i++) {
     data.weights[i].value = 0
