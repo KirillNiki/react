@@ -13,7 +13,7 @@ function MyButton(props) {
   let text = start_text
 
   if (buttonState === true) {
-    text = `${props.data.currentWeight / 1000} kg`
+    text = `${props.data.currentWeight} kg`
   }
 
   return (

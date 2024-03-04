@@ -58,7 +58,7 @@ async function GetData() {
   data.valuePerPersent = data.allValuesSum / 100
   let current_weight = TwoMaxAvarage(data) * factor
   data.currentWeight = current_weight !== undefined ? current_weight : 0
-  data.currentWeight = Math.floor(data.currentWeight)
+  data.currentWeight = Math.round(data.currentWeight / 1000)
   data.sittingTimer = data.sittingTimer !== 0 ? data.sittingTimer * 1000 : Date.now()
 
   for (let i = 0; i < data.weights.length; i++) {
@@ -73,6 +73,7 @@ async function GetData() {
     if (data.infoData[i].time !== 0) {
       let time = new Date(data.infoData[i].time * 1000)
       data.infoData[i].time = time
+      data.infoData[i].value = Math.round(data.infoData[i].value / 1000)
       data.infoData[i].time_string = `${time.getDate()} ${time.getHours()}:${time.getMinutes()}`
       data.infoData[i].day = `${weekDays[time.getDay()]}`
     } else {
@@ -91,7 +92,7 @@ fetch(`${host}watchTime`, {
     'Content-Type': 'application/json'
   },
   body: JSON.stringify({
-    "time": Math.floor((new Date(Date.now())).getTime() / 1000),
+    "time": Math.round((new Date(Date.now())).getTime() / 1000),
   }),
 }).catch((error) => {
   console.log(error);
