@@ -13,8 +13,7 @@ function default_data() {
 }
 
 
-// const host = `http://localhost:9000/`
-const host = `https://192.168.0.1/`
+const host = `http://192.168.0.1/`
 const factor = 34;
 const colors = get_colors()
 
