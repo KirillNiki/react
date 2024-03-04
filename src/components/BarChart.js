@@ -54,8 +54,8 @@ function Chart(props) {
 					</linearGradient>
 				</defs>
 
-				<XAxis dataKey="day" tickLine={false} axisLine={false} fontSize='2vh' />
-				<YAxis tickLine={false} axisLine={false} fontSize='2vh'
+				<XAxis dataKey="day" tickLine={false} axisLine={false} fontSize='1.5vh' />
+				<YAxis tickLine={false} axisLine={false} fontSize='1.5vh'
 					domain={[0, `dataMax + ${max_offset}`]}
 				/>
 

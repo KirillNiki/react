@@ -58,6 +58,7 @@ async function GetData() {
   data.valuePerPersent = data.allValuesSum / 100
   let current_weight = TwoMaxAvarage(data) * factor
   data.currentWeight = current_weight !== undefined ? current_weight : 0
+  data.currentWeight = Math.floor(data.currentWeight)
   data.sittingTimer = data.sittingTimer !== 0 ? data.sittingTimer * 1000 : Date.now()
 
   for (let i = 0; i < data.weights.length; i++) {
@@ -71,6 +72,7 @@ async function GetData() {
   for (var i = 0; i < data.infoData.length; i++) {
     if (data.infoData[i].time !== 0) {
       let time = new Date(data.infoData[i].time * 1000)
+      data.infoData[i].time = time
       data.infoData[i].time_string = `${time.getDate()} ${time.getHours()}:${time.getMinutes()}`
       data.infoData[i].day = `${weekDays[time.getDay()]}`
     } else {
