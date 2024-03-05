@@ -1,4 +1,5 @@
 import { get_colors } from "./components/getColor";
+import xfetch from "./fetch_data";
 import { TwoMaxAvarage } from "./logic";
 
 function default_data() {
@@ -13,7 +14,7 @@ function default_data() {
 }
 
 
-const host = `http://192.168.0.1/`
+const host = `https://192.168.0.1/`
 const factor = 34;
 const colors = get_colors()
 
@@ -44,7 +45,7 @@ async function GetData() {
   let data = default_data()
 
   try {
-    let dataHeaders = await fetch(`${host}data`, { mode: 'cors' })
+    let dataHeaders = await xfetch(`${host}data`, { mode: 'cors' })
     data = await dataHeaders.json()
   }
   catch (error) { console.log(error) }
