@@ -19,7 +19,7 @@ import {
 } from './logic.js';
 import Dialog from '@mui/material/Dialog';
 import InstallButton from './components/InstallButton.js';
-
+import ConnectButton from './components/Connect_button.js';
 
 const myColors = get_colors()
 
@@ -211,6 +211,7 @@ function App() {
 				marginLeft={50}
 			/>
 			<div className='body' style={{ paddingLeft: '3%', paddingRight: '3%' }}>
+				<ConnectButton />
 				<Pannel main_ref={main_ref} history_ref={history_ref} stat_ref={stat_ref} data={data} />
 
 				<div style={{ marginTop: '10%' }}>
@@ -249,16 +250,10 @@ function App() {
 						text_color={myColors.text2}
 						text={`time before trianing in seconds: ${train_state.time}`}
 					/>
-					<ColorfulText
-						color={myColors.block1}
-					>
-						<InstallButton />
-					</ColorfulText>
-
+					<InstallButton />
 				</div>
 
 				<div style={{ height: '100px' }} />
-
 			</div>
 		</div>
 	);
