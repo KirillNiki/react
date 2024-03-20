@@ -1,3 +1,5 @@
+import { set_train } from "./DataReciver";
+
 const expectedWeightPercents = [9.83, 15.95, 15.56, 12.15, 11.37, 11.48, 6.02, 11.6, 3.48, 2.57];
 const colorStates = { greenState: 'greenState', redState: 'redState', yellowState: 'yellowState' };
 const postureSuggestions = { back: 'back', left: 'left', right: 'right', };
@@ -7,7 +9,7 @@ let trainStarted = false;
 let stand = false;
 let trainCounter = 0;
 
-let maxSittingTime = 1000 * 60 * 40;
+let maxSittingTime = 1000 * 20;
 
 
 
@@ -52,9 +54,10 @@ function CountSensorTable(data) {
 
 function CountCurrentState(data) {
   let DeltaMatrix = [0, 0, 0, 0];
+  let weights = [...data.weights].reverse()
   let cerrentWeightDeltaProcents = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-  for (let i = 0; i < data.weights.length; i++) {
-    cerrentWeightDeltaProcents[i] = (data.weights[i].weight / data.valuePerPersent) - expectedWeightPercents[i];
+  for (let i = 0; i < weights.length; i++) {
+    cerrentWeightDeltaProcents[i] = (weights[i].weight / data.valuePerPersent) - expectedWeightPercents[i];
   }
 
   //cerrentWeightDeltaProcents matrix pooling(4 squears)
@@ -133,6 +136,7 @@ function CountMinMaxVals(data) {
 
 async function SyncronizeTrain() {
   try {
+    await set_train();
   }
   catch (error) { console.log(error) }
 }
